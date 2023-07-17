@@ -13,8 +13,6 @@ const { isActiveRoute } = require('./server/helpers/routeHelpers');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-connectDB();
-
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.use(expressLayout);
@@ -39,6 +37,8 @@ app.locals.isActiveRoute = isActiveRoute;
 app.use('/', require('./server/routes/main'))   //on index request, it will route to ./server/routes/main
 app.use('/', require('./server/routes/admin'));
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+connectDB().then(() => {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    })
 })
