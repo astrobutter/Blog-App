@@ -4,7 +4,7 @@ const Post = require('../models/Post');
 
 router.get('/', async (req, res) => {
     const locals = {
-      title: "NodeJs Blog",
+      title: "Home",
       description: "Simple Blog created with NodeJs, Express & MongoDb."
     }
     try {
